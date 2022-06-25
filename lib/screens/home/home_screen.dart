@@ -21,9 +21,8 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FadeInImage(
-                  placeholder: AssetImage('assets/no-image.jpg'),
-                  image: AssetImage('assets/Initial-Image.png'),
+              Image(
+                  image: const AssetImage('assets/Initial-Image.png'),
                   width: double.infinity,
                   height: size.height * 0.6,
                   fit: BoxFit.cover),
@@ -31,7 +30,13 @@ class HomeScreen extends StatelessWidget {
               const CopyText(
                 copyText: copyText,
               ),
-              LargeButton()
+              const LargeButton(
+                color: Color.fromRGBO(225, 239, 255, 100),
+                textColor: Color.fromRGBO(86, 94, 214, 100),
+                customHeight: 44.0,
+                customText: 'Next',
+                routeName: 'signUp',
+              )
             ],
           )),
     );
