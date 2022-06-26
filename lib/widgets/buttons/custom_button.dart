@@ -6,7 +6,7 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final double customHeight;
   final String customText;
-  final String routeName;
+  final Function buttonAction;
 
   const CustomButton(
       {Key? key,
@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
       required this.textColor,
       required this.customHeight,
       required this.customText,
-      required this.routeName})
+      required this.buttonAction})
       : super(key: key);
 
   @override
@@ -29,9 +29,7 @@ class CustomButton extends StatelessWidget {
             elevation: 0.1,
             primary: color,
             textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-        onPressed: () {
-          Navigator.pushNamed(context, routeName);
-        },
+        onPressed: () => buttonAction(),
         child: Text(
           customText,
           style: TextStyle(color: textColor),

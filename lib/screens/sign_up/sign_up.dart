@@ -1,76 +1,111 @@
 import 'package:flutter/material.dart';
-import 'package:medical_services/widgets/buttons/large_button.dart';
-import 'package:medical_services/widgets/buttons/social_media_button.dart';
+import 'package:medical_services/theme/app_theme.dart';
+import 'package:medical_services/widgets/copy_text.dart';
+import 'package:medical_services/widgets/form/custom_form.dart';
+import 'package:medical_services/widgets/widgets.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    const double toolbarHeight = 50;
     return Scaffold(
-      body: MediaQuery.removePadding(
-          context: context,
-          removeLeft: true,
-          removeTop: true,
-          removeRight: true,
-          removeBottom: true,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: size.width,
-                height: size.height * 0.6,
-                padding: EdgeInsets.all(16),
-                child: Image(
-                    image: const AssetImage('assets/Sign-Image.png'),
-                    width: double.infinity,
-                    height: size.height * 0.6,
-                    fit: BoxFit.fitWidth),
-              ),
-              SizedBox(
-                  height: 24,
-                  width: double.infinity,
-                  child: Container(
-                    height: double.maxFinite,
-                  )),
-              _ButtonList(size: size)
-            ],
-          )),
+      appBar: AppBar(
+        toolbarHeight: toolbarHeight,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black87),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          _TextContainer(
+            size: size,
+            toolbarHeight: toolbarHeight,
+          ),
+          FormContainer(size: size, toolbarHeight: toolbarHeight)
+        ]),
+      ),
     );
   }
 }
 
-class _ButtonList extends StatelessWidget {
-  const _ButtonList({
+class FormContainer extends StatelessWidget {
+  const FormContainer({
     Key? key,
     required this.size,
+    required this.toolbarHeight,
   }) : super(key: key);
 
-  final Size size;
+  final size;
+  final double toolbarHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    final Map<String, String> formValues = {
+      'user_name': '',
+      'email': '',
+      'password': '',
+    };
+
+    return Container(
+        width: double.infinity,
+        height: (size.height * 0.5) - toolbarHeight,
+        padding: const EdgeInsets.all(24),
+        child: CustomForm(formValues: formValues, inputs: [
+          CustomInput(
+            formValues: formValues,
+            formField: 'user_name',
+            icon: Icons.person,
+            iconColor: AppTheme.primary,
+            hintText: 'User Name',
+            isFilled: false,
+            fillColor: AppTheme.primary,
+          ),
+          const SizedBox(height: 16),
+          CustomInput(
+            formValues: formValues,
+            formField: 'email',
+            icon: Icons.email,
+            iconColor: AppTheme.primary,
+            hintText: 'Email...',
+            isFilled: false,
+            fillColor: AppTheme.primary,
+          ),
+          const SizedBox(height: 16),
+          CustomInput(
+            formValues: formValues,
+            formField: 'password',
+            icon: Icons.password,
+            iconColor: AppTheme.primary,
+            hintText: 'Password',
+            isFilled: false,
+            fillColor: AppTheme.primary,
+            obscureText: true,
+          ),
+        ]));
+  }
+}
+
+class _TextContainer extends StatelessWidget {
+  final size;
+  final double toolbarHeight;
+
+  const _TextContainer(
+      {Key? key, required this.size, required this.toolbarHeight})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size.width,
-      height: size.height * 0.4 - 24,
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: const [
-          SocialMediaButton(
-              customText: 'Continue with Facebook',
-              socialMediaIcon: Icons.facebook),
-          SizedBox(height: 16),
-          LargeButton(
-            color: Color.fromRGBO(86, 94, 214, 100),
-            textColor: Color.fromRGBO(225, 239, 255, 100),
-            customHeight: 60,
-            customText: 'Sign with password',
-            routeName: 'signUp',
-          )
-        ],
-      ),
-    );
+        width: double.infinity,
+        height: (size.height * 0.5) - toolbarHeight,
+        padding: const EdgeInsets.all(24),
+        child: const CopyText(
+          copyText: 'Create your Account',
+          fontSize: 72,
+        ));
   }
 }

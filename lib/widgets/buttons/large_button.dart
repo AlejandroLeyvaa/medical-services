@@ -4,17 +4,21 @@ import 'package:medical_services/widgets/widgets.dart';
 class LargeButton extends StatelessWidget {
   final Color color;
   final Color textColor;
-  final double customHeight;
+  final double containerHeight;
+  final double buttonHeight;
+  final double horizontalPadding;
   final String customText;
-  final String routeName;
+  final Function buttonAction;
 
   const LargeButton(
       {Key? key,
       required this.color,
       required this.textColor,
-      required this.customHeight,
+      required this.containerHeight,
+      required this.buttonHeight,
       required this.customText,
-      required this.routeName})
+      required this.buttonAction,
+      this.horizontalPadding = 24})
       : super(key: key);
 
   @override
@@ -22,17 +26,18 @@ class LargeButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding,
         ),
-        height: size.height * 0.25,
+        height: containerHeight,
         alignment: Alignment.bottomCenter,
         child: CustomButton(
-            size: size,
-            color: color,
-            textColor: textColor,
-            customHeight: customHeight,
-            customText: customText,
-            routeName: routeName));
+          size: size,
+          color: color,
+          textColor: textColor,
+          customHeight: buttonHeight,
+          customText: customText,
+          buttonAction: buttonAction,
+        ));
   }
 }

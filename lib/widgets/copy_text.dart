@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class CopyText extends StatelessWidget {
   final String copyText;
+  final double fontSize;
 
   const CopyText({
     Key? key,
     required this.copyText,
+    required this.fontSize,
   }) : super(key: key);
 
   @override
@@ -17,9 +19,9 @@ class CopyText extends StatelessWidget {
         copyText,
         // overflow: TextOverflow.ellipsis,
         textAlign: TextAlign.center,
-        style: const TextStyle(
+        style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 32,
+          fontSize: fontSize,
         ),
       ),
     );

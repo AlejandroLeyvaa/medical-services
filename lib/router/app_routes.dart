@@ -3,6 +3,7 @@ import 'package:medical_services/models/menu_options.dart';
 import 'package:medical_services/screens/home/home_screen.dart';
 import 'package:medical_services/screens/physiotherapyServices/physiotherapy_services_screen.dart';
 import 'package:medical_services/screens/sign_up/sign_up.dart';
+import 'package:medical_services/screens/sign_up/sign_up_social_media.dart';
 
 class AppRoutes {
   static final initialRoute = 'home';
@@ -14,10 +15,15 @@ class AppRoutes {
         name: 'Servicios Fisioterapeuticos',
         screen: PhysiotherapyServicesScreen()),
     const MenuOptions(
+        route: 'signUpSocialMedia',
+        icon: Icons.medical_services,
+        name: 'Servicios Fisioterapeuticos',
+        screen: SignUpSocialMediaScreen()),
+    const MenuOptions(
         route: 'signUp',
         icon: Icons.medical_services,
         name: 'Servicios Fisioterapeuticos',
-        screen: SignUpScreen()),
+        screen: SignUp()),
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {

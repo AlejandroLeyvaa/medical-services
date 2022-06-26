@@ -29,13 +29,16 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 24),
               const CopyText(
                 copyText: copyText,
+                fontSize: 32,
               ),
-              const LargeButton(
-                color: Color.fromRGBO(225, 239, 255, 100),
-                textColor: Color.fromRGBO(86, 94, 214, 100),
-                customHeight: 44.0,
+              LargeButton(
+                color: const Color.fromRGBO(225, 239, 255, 100),
+                textColor: const Color.fromRGBO(86, 94, 214, 100),
+                containerHeight: size.height * 0.25,
+                buttonHeight: 44.0,
                 customText: 'Next',
-                routeName: 'signUp',
+                buttonAction: () =>
+                    Navigator.pushNamed(context, 'signUpSocialMedia'),
               )
             ],
           )),
